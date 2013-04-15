@@ -48,7 +48,8 @@ Puppet::Type.type(:keystone_user_role).provide(
   def get_user_and_tenant
     user, tenant = resource[:name].split('@', 2)
     tenant_id = self.class.get_tenants[tenant]
-    [self.class.get_users(tenant_id)[user], self.class.get_tenants[tenant]]
+    user_id = self.class.get_users()[user]
+    [user_id, tenant_id]
   end
 
   def exists?
